@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"github.com/eron97/api_createAccount/config/internal/controller"
+	"github.com/eron97/api_createAccount/config/controller"
 	"github.com/gin-gonic/gin"
 )
 
