@@ -31,18 +31,26 @@ func NewRestErr(message, err string, code int, causes []Causes) *RestErr {
 	}
 }
 
-func NewRequestError(message string) *RestErr {
+func NewBadRequestError(message string) *RestErr {
 	return &RestErr{
 		Message: message,
-		Err:     "bad request",
+		Err:     "bad_request",
 		Code:    http.StatusBadRequest,
+	}
+}
+
+func NewUnauthorizedRequestError(message string) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err:     "unauthorized",
+		Code:    http.StatusUnauthorized,
 	}
 }
 
 func NewBadRequestValidationError(message string, causes []Causes) *RestErr {
 	return &RestErr{
 		Message: message,
-		Err:     "bad request",
+		Err:     "bad_request",
 		Code:    http.StatusBadRequest,
 		Causes:  causes,
 	}
@@ -51,7 +59,7 @@ func NewBadRequestValidationError(message string, causes []Causes) *RestErr {
 func NewInternalServerError(message string) *RestErr {
 	return &RestErr{
 		Message: message,
-		Err:     "Internal_server_error",
+		Err:     "internal_server_error",
 		Code:    http.StatusInternalServerError,
 	}
 }
