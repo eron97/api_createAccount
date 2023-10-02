@@ -1,6 +1,8 @@
 package rest_err
 
-// Objeto de erro
+import "net/http"
+
+// objeto de erros
 
 type RestErr struct {
 	Message string   `json:"message"`
@@ -14,7 +16,7 @@ type Causes struct {
 	Message string `json:"message"`
 }
 
-// Construtor para o objeto de erro
+// Funções construtoras dos objetos de erros
 
 func NewRestErr(message, err string, code int, causes []Causes) *RestErr {
 	return &RestErr{
@@ -22,5 +24,46 @@ func NewRestErr(message, err string, code int, causes []Causes) *RestErr {
 		Err:     err,
 		Code:    code,
 		Causes:  causes,
+	}
+}
+
+func NewRequestError(message string) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err:     "bad request",
+		Code:    http.StatusBadRequest,
+	}
+}
+
+func NewBadRequestValidationError(message string, causes []Causes) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err:     "bad request",
+		Code:    http.StatusBadRequest,
+		Causes:  causes,
+	}
+}
+
+func NewInternalServerError(message string) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err:     "Internal_server_error",
+		Code:    http.StatusInternalServerError,
+	}
+}
+
+func NewNotFoundError(message string) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err:     "not_found",
+		Code:    http.StatusNotFound,
+	}
+}
+
+func NewForbiddenError(message string) *RestErr {
+	return &RestErr{
+		Message: message,
+		Err:     "forbidden",
+		Code:    http.StatusForbidden,
 	}
 }
